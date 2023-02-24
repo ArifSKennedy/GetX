@@ -3,13 +3,19 @@ version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment: 
-  sdk: '>=2.15.1 <3.0.0'
+  sdk: '>=2.18.1 <3.0.0'
 
 dependencies: 
   cupertino_icons: ^1.0.2
-  get: 4.6.5
-  flutter: 
+  dio: ^5.0.0
+  flutter:
     sdk: flutter
+  get: 4.6.5
+  get_storage: ^2.0.3
+  google_fonts: ^4.0.3
+  hexcolor: ^3.0.1
+  http: ^0.13.5
+  lottie: ^2.2.0
 
 dev_dependencies: 
   flutter_lints: ^1.0.0
