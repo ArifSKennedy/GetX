@@ -1,3 +1,4 @@
+import 'package:aplikasi_uji/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:aplikasi_uji/app/utils/api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +40,9 @@ class LoginController extends GetxController {
 
     if (response.body['success'] == true) {
       //struktur if-else untuk menentukan tindakan yang harus diambil berdasarkan respons yang diterima dari permintaan HTTP. Jika nilai kunci success dalam response.body adalah true, maka aplikasi menulis token akses yang diperoleh dari respons ke penyimpanan lokal menggunakan authToken.write().
-      authToken.write(
-          'token',
-          response.body[
-              'access_token']); //menyimpan token akses ke penyimpanan lokal dengan menggunakan authToken.write()
+      authToken.write('token', response.body['access_token']);
+      Get.offAll(() =>
+          const DashboardView()); //menyimpan token akses ke penyimpanan lokal dengan menggunakan authToken.write()
     } else {
       //Jika tidak, aplikasi menampilkan pesan kesalahan menggunakan Get.snackbar()
       Get.snackbar(
