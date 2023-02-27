@@ -1,7 +1,9 @@
 import 'package:aplikasi_uji/app/data/headline_response.dart';
+import 'package:aplikasi_uji/app/modules/home/views/home_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
 
 import '../controllers/dashboard_controller.dart';
@@ -12,6 +14,7 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     DashboardController controller = Get.put(DashboardController());
     final ScrollController scrollController = ScrollController();
+    final auth = GetStorage();
     // Mendefinisikan sebuah widget bernama build dengan tipe StatelessWidget yang memerlukan BuildContext.
     return SafeArea(
       // Widget SafeArea menempatkan semua konten widget ke dalam area yang aman (safe area) dari layar.
@@ -19,6 +22,14 @@ class DashboardView extends GetView<DashboardController> {
         length: 4,
         // Widget DefaultTabController digunakan untuk mengatur tab di aplikasi.
         child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () async {
+              await auth.erase();
+              Get.offAll(() => const HomeView());
+            },
+            backgroundColor: Colors.redAccent,
+            child: const Icon(Icons.logout_rounded),
+          ),
           // Widget Scaffold digunakan sebagai struktur dasar aplikasi.
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(120.0),
@@ -33,10 +44,9 @@ class DashboardView extends GetView<DashboardController> {
                     textAlign: TextAlign.end,
                     // Properti textAlign digunakan untuk menentukan perataan teks.
                   ),
-                  subtitle: const Text(
-                    "Agung Wahyudi",
+                  subtitle: Text(
+                    auth.read('full_name').toString(),
                     textAlign: TextAlign.end,
-                    // Properti textAlign digunakan untuk menentukan perataan teks.
                   ),
                   trailing: Container(
                     // Widget Container digunakan untuk mengatur tampilan konten dalam kotak.
